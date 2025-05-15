@@ -1,0 +1,21 @@
+{
+  "click_id": "click-uuid-456",
+  "impression_id": "imp-uuid-123",
+  "timestamp": "2023-11-15T14:30:05Z",
+  "clicked_ad": {
+    "ad_id": "ad-123",
+    "ad_position": 1,
+    "click_coordinates": {
+      "x": 250,
+      "y": 400,
+      "normalized_x": 0.65,
+      "normalized_y": 0.80
+    },
+    "time_to_click": 5.2
+  },
+  "user_info": {
+    "user_ip": "192.168.1.1",
+    "state": "CA",
+    "session_id": "session-abc123"
+  }
+}

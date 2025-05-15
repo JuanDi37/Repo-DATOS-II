@@ -1,0 +1,28 @@
+# prometheus/prometheus.yml
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: 'api'
+    metrics_path: '/metrics'
+    static_configs:
+      - targets: ['api:5000']
+
+  - job_name: 'consumer'
+    metrics_path: '/metrics'
+    static_configs:
+      - targets: ['consumer:8000']
+
+  - job_name: 'minio'
+    metrics_path: '/minio/v2/metrics/cluster'
+    static_configs:
+      - targets: ['minio:9000']
+
+  - job_name: 'rabbitmq-queues'
+    metrics_path: '/metrics'
+    static_configs:
+      - targets: ['rabbitmq-exporter:9419']

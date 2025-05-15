@@ -1,0 +1,38 @@
+{
+  "conversion_id": "conv-uuid-789",
+  "click_id": "click-uuid-456",
+  "impression_id": "imp-uuid-123",
+  "timestamp": "2023-11-15T14:45:00Z",
+  "conversion_type": "purchase",
+  "conversion_value": 59.99,
+  "conversion_currency": "USD",
+  "conversion_attributes": {
+    "order_id": "order-xyz987",
+    "items": [
+      {
+        "product_id": "prod-135",
+        "quantity": 1,
+        "unit_price": 59.99
+      }
+    ]
+  },
+  "attribution_info": {
+    "time_to_convert": 900,
+    "attribution_model": "last_click",
+    "conversion_path": [
+      {
+        "event_type": "impression",
+        "timestamp": "2023-11-15T14:30:00Z"
+      },
+      {
+        "event_type": "click",
+        "timestamp": "2023-11-15T14:30:05Z"
+      }
+    ]
+  },
+  "user_info": {
+    "user_ip": "192.168.1.1",
+    "state": "CA",
+    "session_id": "session-abc123"
+  }
+}

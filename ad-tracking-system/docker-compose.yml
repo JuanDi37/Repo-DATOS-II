@@ -1,0 +1,88 @@
+# docker-compose.yml
+version: '3.8'
+
+services:
+  api:
+    build: ./api
+    env_file: .env
+    ports:
+      - '5000:5000'
+    depends_on:
+      - rabbitmq
+      - minio
+
+  consumer:
+    build: ./consumer
+    env_file: .env
+    ports:
+      - '8000:8000'
+    depends_on:
+      - rabbitmq
+      - timescaledb
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+    healthcheck:
+      test: ["CMD", "rabbitmqctl", "status"]
+      interval: 10s
+      retries: 5
+
+  rabbitmq-exporter:
+    image: kbudde/rabbitmq-exporter
+    environment:
+      - RABBITMQ_SERVER_URL=http://rabbitmq:15672
+    depends_on:
+      - rabbitmq
+    ports:
+      - '9419:9419'
+
+  minio:
+    image: minio/minio:latest
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ACCESS_KEY: minioadmin
+      MINIO_SECRET_KEY: minioadmin
+    ports:
+      - '9000:9000'
+      - '9001:9001'
+    volumes:
+      - minio_data:/data
+
+  timescaledb:
+    image: timescale/timescaledb:latest-pg12
+    environment:
+      POSTGRES_DB: ${TSDB_DB}
+      POSTGRES_USER: ${TSDB_USER}
+      POSTGRES_PASSWORD: ${TSDB_PASSWORD}
+    ports:
+      - '5432:5432'
+    volumes:
+      - tsdb_data:/var/lib/postgresql/data
+    command: postgres -c shared_preload_libraries=timescaledb
+
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - '9090:9090'
+
+  grafana:
+    image: grafana/grafana:latest
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: admin
+    ports:
+      - '3000:3000'
+    volumes:
+      - grafana_data:/var/lib/grafana
+
+volumes:
+  minio_data:
+  tsdb_data:
+  grafana_data:

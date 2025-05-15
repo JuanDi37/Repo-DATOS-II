@@ -1,0 +1,29 @@
+{
+  "impression_id": "imp-uuid-123",
+  "user_ip": "192.168.1.1",
+  "user_agent": "Mozilla/5.0...",
+  "timestamp": "2023-11-15T14:30:00Z",
+  "state": "CA",
+  "search_keywords": "running shoes",
+  "session_id": "session-abc123",
+  "ads": [
+    {
+      "advertiser": {
+        "advertiser_id": "adv-789",
+        "advertiser_name": "Nike Inc."
+      },
+      "campaign": {
+        "campaign_id": "camp-456",
+        "campaign_name": "Fall Collection 2023"
+      },
+      "ad": {
+        "ad_id": "ad-123",
+        "ad_name": "Air Max Pro",
+        "ad_text": "New Air Max Pro - Limited Edition",
+        "ad_link": "https://example.com/airmaxpro",
+        "ad_position": 1,
+        "ad_format": "banner_728x90"
+      }
+    }
+  ]
+}

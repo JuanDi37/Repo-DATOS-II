@@ -1,0 +1,7 @@
+flask
+flask-cors
+pika
+boto3
+pydantic
+prometheus_client
+gunicorn
